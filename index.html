@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+</head>
+<body>
+        <div class="jumbotron">
+                <h1 class="text-center">Employee Data Management</h1>
+                <h2 class="text-center">A Comprehensive Directory of Employee Billable Hours</h2>
+                    </div>
+                  <div class="row">
+                        <div class="container">
+                        <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Employee Name</th>
+                                    <th scope="col">Destination</th>
+                                    <th scope="col">Frequency (min)</th>
+                                    <th scope="col">Next Arrival</th>
+                                    <th scope="col">Minutes Away</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">Trenton Express</th>
+                                    <td>Trenton</td>
+                                    <td>25</td>
+                                    <td>05:35 PM</td>
+                                    <td>10</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">Oregon Trail</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                    <td>asdf</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                    <td>asdf</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <div class = "col-md-5">
+                              <form>
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Employee Name</label>
+                                      <input type="text" class="form-control" id="employeeName" aria-describedby="emailHelp" placeholder="Enter employee name">
+    
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="exampleInputPassword1">Role</label>
+                                      <input type="password" class="form-control" id="role" placeholder="Employee Role">
+                                    </div>
+                                    <div class="form-group">
+                                            <label for="exampleInputPassword1">Start Date (DD/MM/YY - ex: 01/01/99)</label>
+                                            <input type="date" class="form-control" id="startDate" placeholder="Empolyee Role">
+                                    </div>
+                                    <div class="form-group">
+                                            <label for="exampleInputPassword1">Montly Rate</label>
+                                            <input type="password" class="form-control" id="monthlyRate" placeholder="Empolyee Role">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                  </form>
+                                </div>
+                              </div>
+                    
+                    </div>
+    
+                    <script src="https://code.jquery.com/jquery.js"></script>
+    
+                    <!-- LINK TO FIREBASE GOES HERE -->
+                    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    
+                    <script>
+                            //  START CODING BELOW!!
+
+                            var employeeArray = [{
+                                name: "Trenton Express",
+                                destination: "Trenton",
+                                frequency:"25",
+                                nextArrival: "05:35 PM",
+                                minutesAway: "10"
+                            },
+                            {
+                                name: "Oregon Trail",
+                                destination: "Salem, Oregon",
+                                frequency:"3600",
+                                nextArrival: "01:39 PM",
+                                minutesAway: "1154"
+                            },
+                            {
+                                name: "Midnight Carriage",
+                                destination: "Philadelpha",
+                                frequency:"15",
+                                nextArrival: "05:35 PM",
+                                minutesAway: "10"
+                            },
+                            {
+                                name: "Sing Sing Caravan",
+                                destination: "Atlanta",
+                                frequency:"45",
+                                nextArrival: "05:53 PM",
+                                minutesAway: "28"
+                            },
+                              {
+                                name: "Boston Bus",
+                                destination: "Boston",
+                                frequency:"65",
+                                nextArrival: "05:50 PM",
+                                minutesAway: "25"
+                            },
+                            {
+                                name: "California Caravan",
+                                destination: "San Franciso",
+                                frequency:"6000",
+                                nextArrival: "01:25 PM",
+                                minutesAway: "4740"
+                            },{
+                                name: "Analben's Train",
+                                destination: "Florida",
+                                frequency:"25",
+                                nextArrival: "05:28 PM",
+                                minutesAway: "3"
+                            }]
+                        
+                            // Initialize Firebase
+                            var config = {
+                              apiKey: "AIzaSyCJnqmcs8l_JSo34JUPIn8Bz74u50LaPUA",
+                              authDomain: "fir-project-2a2e1.firebaseapp.com",
+                              databaseURL: "https://fir-project-2a2e1.firebaseio.com",
+                              projectId: "fir-project-2a2e1",
+                              storageBucket: "fir-project-2a2e1.appspot.com",
+                              messagingSenderId: "56948136656"
+                            };
+                        
+                            firebase.initializeApp(config);
+                        
+                            var database = firebase.database();
+                        
+                            var name = "";
+                            var role = "";
+                            var startDate = "";
+                            var monthsWorked = 0;
+                            var monthlyRate = "";
+                            var totalBilled = "";
+                        
+                            // Create a variable to reference the database
+                        
+                        
+                              // Code in the logic for storing and retrieving the most recent user.
+                              $(".btn").on("click", function() {
+                              
+                                name = $("#employeeName").val().trim
+                                role = $("#role").val().trim
+                                startDate = $("#startDate").val().trim
+                                monthlyRate = $("#monthlyRate").val().trim
+                        
+                                database.ref().set({
+                                  name: name,
+                                  role: role,
+                                  startDate: startDate,
+                                  monthlyRate: monthlyRate
+                                });
+                        
+                              // Don't forget to provide initial data to your Firebase database.
+                              database.ref().on("value", function(snapshot) {
+                                console.log(snapshot.val());
+                                $("#name-display").text(snapshot.val().name);
+                                $("#email-display").text(snapshot.val().email);
+                                $("#age-display").text(snapshot.val().age);
+                                $("#comment-display").text(snapshot.val().comemnt);
+                              }, function(errorObject) {
+                                console.log("The read failed: " + errorObject.code);
+                              });
+                        
+                            });
+                        
+                        
+                            // Firebase watcher + initial loader HINT: .on("value")
+                        
+                        
+                            // Create Error Handling
+                          </script>
+    
+</body>
+</html>
